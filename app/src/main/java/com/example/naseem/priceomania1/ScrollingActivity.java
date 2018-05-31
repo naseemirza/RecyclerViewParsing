@@ -1,10 +1,17 @@
 package com.example.naseem.priceomania1;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.GridView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -13,12 +20,18 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.naseem.priceomania1.BottomBar.Activity1;
+import com.example.naseem.priceomania1.BottomBar.Activity2;
+import com.example.naseem.priceomania1.BottomBar.Activity3;
+import com.example.naseem.priceomania1.BottomBar.Activity4;
+import com.example.naseem.priceomania1.BottomBar.BottomNavigationViewHelper;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ScrollingActivity extends AppCompatActivity   {
     private Adapter mExampleAdapter1,mExampleAdapter2,mExampleAdapter3,mExampleAdapter4;
@@ -33,10 +46,123 @@ public class ScrollingActivity extends AppCompatActivity   {
     private Boolean mHorizontal;
 
 
+    // More Categorirs
+
+    private static final String JSON_URL = "http://ae.priceomania.com/mobileappwebservices/getparentcategory";
+
+    private ParentAdapter mExampleAdapter;
+    private ArrayList<Parent> mExampleList;
+    private RequestQueue mRequestQueue;
+    private RecyclerView sRecyclerview;
+
+    GridAdapter adapter;
+    GridView gv;
+
+
+    private final String cat_name_array[] = {
+            "Donut",
+            "Eclair",
+            "Froyo",
+            "Gingerbread",
+            "Honeycomb",
+            "Ice Cream Sandwich",
+            "Jelly Bean",
+            "KitKat",
+            "Lollipop",
+            "Marshmallow",
+            "Donut",
+            "Eclair",
+            "Froyo",
+            "Gingerbread",
+            "Honeycomb",
+            "Ice Cream Sandwich",
+            "Jelly Bean",
+            "KitKat",
+            "Lollipop",
+            "Marshmallow"
+    };
+
+    private final int cat_image_array[] = {
+           R.drawable.tv_video, R.drawable.tv_video, R.drawable.tv_video, R.drawable.tv_video, R.drawable.tv_video, R.drawable.tv_video,
+            R.drawable.tv_video, R.drawable.tv_video, R.drawable.tv_video, R.drawable.tv_video, R.drawable.tv_video, R.drawable.tv_video,
+            R.drawable.tv_video, R.drawable.tv_video, R.drawable.tv_video, R.drawable.tv_video, R.drawable.tv_video, R.drawable.tv_video,
+            R.drawable.tv_video, R.drawable.tv_video,
+    };
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scrolling);
+
+
+
+        // More Categorirs
+
+        initViews();
+
+//        gv= (GridView) findViewById(R.id.gv);
+//
+//        adapter=new GridAdapter(this,getData());
+//
+//        gv.setAdapter(adapter);
+
+
+
+
+//        mExampleList = new ArrayList<>();
+//        sRecyclerview=(RecyclerView)findViewById(R.id.recyclerview5);
+//        sRecyclerview.setNestedScrollingEnabled(false);
+//        sRecyclerview.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+//        mRequestQueue = Volley.newRequestQueue(this);
+//        sRecyclerview.setHasFixedSize(true);
+//
+//        parseJSON();
+
+
+        //bottombar
+
+
+//        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavView_Bar);
+//        BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
+//        Menu menu = bottomNavigationView.getMenu();
+//        MenuItem menuItem = menu.getItem(0);
+//        menuItem.setChecked(true);
+//
+//        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//                switch (item.getItemId()){
+//                    case R.id.ic_arrow:
+//
+//                        break;
+//
+//                    case R.id.ic_android:
+//                        Intent intent1 = new Intent(ScrollingActivity.this, Activity1.class);
+//                        startActivity(intent1);
+//                        break;
+//
+//                    case R.id.ic_books:
+//                        Intent intent2 = new Intent(ScrollingActivity.this, Activity2.class);
+//                        startActivity(intent2);
+//                        break;
+//
+//                    case R.id.ic_center_focus:
+//                        Intent intent3 = new Intent(ScrollingActivity.this, Activity3.class);
+//                        startActivity(intent3);
+//                        break;
+//
+//                    case R.id.ic_backup:
+//                        Intent intent4 = new Intent(ScrollingActivity.this,Activity4.class);
+//                        startActivity(intent4);
+//                        break;
+//                }
+//
+//                return false;
+//            }
+//        });
+
 
 
 
@@ -89,28 +215,81 @@ public class ScrollingActivity extends AppCompatActivity   {
 
         parseJSON4();
 
-//        mRecyclerview.addOnItemTouchListener(new CustomRVItemTouchListener(this, mRecyclerview, new RecyclerViewItemClickListener() {
-//            @Override
-//            public void onClick(View view, int pos) {
-//
-//                ImageView imageview=(ImageView)findViewById(R.id.imageview);
-//                TextView nameTextview=(TextView)findViewById(R.id.nameTextview);
-//                TextView onlinestoreTextview2=(TextView)findViewById(R.id.onlinestoreTextview2);
-//
-//                Intent intent=new Intent(ScrollingActivity.this,CardDetails.class);
-//
-//
-//                intent.putExtra("Mname",nameTextview.getText().toString());
-//                intent.putExtra("Mprice",onlinestoreTextview2.getText().toString());
-//
-//
-//                startActivity(intent);
-//            }
-//        }));
-
-        //setupAdapter();
 
     }
+        // More Categories
+
+
+    private void initViews(){
+        RecyclerView recyclerView = (RecyclerView)findViewById(R.id.recyclerview5);
+        recyclerView.setHasFixedSize(true);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 5, GridLayoutManager.HORIZONTAL, false);
+
+        recyclerView.setLayoutManager(layoutManager);
+
+        ArrayList<GridModel> grdlist = prepareData();
+        GridAdapter adapter = new GridAdapter(getApplicationContext(),grdlist);
+        recyclerView.setAdapter(adapter);
+
+    }
+    private ArrayList<GridModel> prepareData(){
+
+        ArrayList<GridModel> grd = new ArrayList<>();
+        for(int i=0;i<cat_name_array.length;i++){
+            GridModel androidVersion = new GridModel();
+            androidVersion.setName(cat_name_array[i]);
+            androidVersion.setImage(cat_image_array[i]);
+            grd.add(androidVersion);
+        }
+        return grd;
+    }
+
+
+//    private void parseJSON() {
+//
+//        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://ae.priceomania.com/mobileappwebservices/getparentcategory",
+//                new Response.Listener<String>() {
+//                    @Override
+//                    public void onResponse(String response) {
+//
+//                        try {
+//                            Log.e("rootJsonArray",response);
+//                            JSONArray rootJsonArray = new JSONArray(response);
+//
+//                            Log.e("rootJsonArrayLength",rootJsonArray.length()+"");
+//
+//                            for (int i = 0; i < rootJsonArray.length(); i++) {
+//                                JSONObject object = rootJsonArray.getJSONObject(i);
+//
+//                                mExampleList.add(new Parent(object.optString("category_id"),
+//                                        object.optString("category_name"),
+//                                        object.optString("category_image")));
+//                            }
+//
+//                            Log.e("rootJsonArray",mExampleList.size()+"");
+//
+//                            mExampleAdapter = new ParentAdapter(ScrollingActivity.this, mExampleList);
+//                            sRecyclerview.setAdapter(mExampleAdapter);
+//                            mExampleAdapter.notifyDataSetChanged();
+//                            sRecyclerview.setHasFixedSize(true);
+//
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//
+//                    }
+//                },
+//                new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                        //Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+//                        // Log.e("TAg",error.getMessage());
+//                    }
+//                });
+//
+//        mRequestQueue = Volley.newRequestQueue(this);
+//        mRequestQueue.add(stringRequest);
+//    }
 
     private void parseJSON1() {
 
@@ -128,7 +307,8 @@ public class ScrollingActivity extends AppCompatActivity   {
                             for (int i = 0; i < rootJsonArray.length(); i++) {
                                 JSONObject object = rootJsonArray.getJSONObject(i);
 
-                                mExampleList1.add(new App(object.optString("product_image"),
+                                mExampleList1.add(new App(object.optString("id"),
+                                        object.optString("product_image"),
                                         object.optString("modelno"),
                                         object.optString("currency_type"),
                                         object.optString("price"),
@@ -174,7 +354,8 @@ public class ScrollingActivity extends AppCompatActivity   {
                             for (int i = 0; i < rootJsonArray.length(); i++) {
                                 JSONObject object = rootJsonArray.getJSONObject(i);
 
-                                mExampleList2.add(new App(object.optString("product_image"),
+                                mExampleList2.add(new App(object.optString("id"),
+                                        object.optString("product_image"),
                                         object.optString("modelno"),
                                         object.optString("currency_type"),
                                         object.optString("price"),
@@ -220,7 +401,8 @@ public class ScrollingActivity extends AppCompatActivity   {
                             for (int i = 0; i < rootJsonArray.length(); i++) {
                                 JSONObject object = rootJsonArray.getJSONObject(i);
 
-                                mExampleList3.add(new App(object.optString("product_image"),
+                                mExampleList3.add(new App(object.optString("id"),
+                                        object.optString("product_image"),
                                         object.optString("modelno"),
                                         object.optString("currency_type"),
                                         object.optString("price"),
@@ -267,7 +449,8 @@ public class ScrollingActivity extends AppCompatActivity   {
                             for (int i = 0; i < rootJsonArray.length(); i++) {
                                 JSONObject object = rootJsonArray.getJSONObject(i);
 
-                                mExampleList4.add(new App(object.optString("product_image"),
+                                mExampleList4.add(new App(object.optString("id"),
+                                        object.optString("product_image"),
                                         object.optString("modelno"),
                                         object.optString("currency_type"),
                                         object.optString("price"),
@@ -297,11 +480,11 @@ public class ScrollingActivity extends AppCompatActivity   {
         mRequestQueue4.add(stringRequest);
     }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState){
-        super.onSaveInstanceState(outState);
-        outState.putBoolean(ORIENTATION,mHorizontal);
-    }
+//    @Override
+//    protected void onSaveInstanceState(Bundle outState){
+//        super.onSaveInstanceState(outState);
+//        outState.putBoolean(ORIENTATION,mHorizontal);
+//    }
 
 
 //    private void setupAdapter() {

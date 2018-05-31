@@ -49,8 +49,8 @@ public class TabActivity1 extends AppCompatActivity   {
 
 
 
-        mobilenametext=(TextView)findViewById(R.id.mobilenametext);
-        priceTextd=(TextView)findViewById(R.id.priceTextd);
+       // mobilenametext=(TextView)findViewById(R.id.mobilenametext);
+       // priceTextd=(TextView)findViewById(R.id.priceTextd);
         getSupportActionBar().setTitle("Mobile Phones");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

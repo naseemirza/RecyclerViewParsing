@@ -3,6 +3,7 @@
     package="com.example.naseem.priceomania1">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
@@ -32,10 +33,28 @@
             android:name=".CardDetails"
             android:label="@string/title_activity_card_details"
             android:theme="@style/AppTheme" />
-        <activity android:name=".TabActivity1" />
-        <activity android:name=".TabActivity2" />
-        <activity android:name=".TabActivity3" />
-        <activity android:name=".ExpandableActivity"></activity>
+        <activity android:name=".BottomBar.Activity1" />
+        <activity android:name=".BottomBar.Activity2" />
+        <activity android:name=".BottomBar.Activity3" />
+        <activity android:name=".BottomBar.Activity4" />
+        <activity android:name=".ExpandableActivity" />
+        <activity android:name=".DetailsActivityfldr.DetailsActivity" />
+        <activity
+            android:name=".DialogActivity"
+            android:parentActivityName=".CardDetails" />
+        <activity
+            android:name=".SeeAllOptions"
+            android:parentActivityName=".DialogActivity" />
+        <activity
+            android:name=".ColorActivity"
+            android:parentActivityName=".DialogActivity" />
+        <activity
+            android:name=".StorageActivity"
+            android:parentActivityName=".DialogActivity" />
+        <activity
+            android:name=".NetworkActivity"
+            android:parentActivityName=".DialogActivity" />
+        <activity android:name=".MoreSites.MoreSitesActivity" />
     </application>
 
 </manifest>

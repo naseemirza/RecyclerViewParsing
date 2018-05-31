@@ -8,6 +8,8 @@
     android:fitsSystemWindows="true"
     tools:context="com.example.naseem.priceomania1.ScrollingActivity">
 
+
+
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
 
@@ -54,29 +56,33 @@
             android:layout_marginStart="70dp"
             android:layout_marginTop="20dp"/>
 
-        <!--<EditText-->
-            <!--android:id="@+id/editMobileNo"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="40dp"-->
-            <!--android:layout_marginStart="70dp"-->
-            <!--android:layout_marginTop="20dp"-->
-            <!--android:ems="10"-->
 
-            <!--android:background="@color/colorWhite"-->
-            <!--android:drawableLeft="@drawable/ic_search_black_24dp"-->
-            <!--android:gravity="center"-->
-           <!--android:hint="Search for products"-->
-
-            <!--android:layout_marginLeft="5dp"-->
-            <!--android:layout_marginRight="5dp"-->
-            <!--android:layout_marginBottom="13dp"-->
-            <!--android:layout_alignParentBottom="true"-->
-            <!--android:layout_alignParentEnd="true">-->
-        <!--</EditText>-->
-
-        <!--android:layout_margin="@dimen/fab_margin"-->
     </android.support.design.widget.CollapsingToolbarLayout>
+    <RelativeLayout
 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:id="@+id/bottomBar"-->
+
+        <!--android:layout_alignParentBottom="true">-->
+
+        <!--<android.support.design.widget.BottomNavigationView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:id="@+id/bottomNavView_Bar"-->
+            <!--android:background="@color/lightgreen"-->
+            <!--app:menu="@menu/bottom_items">-->
+
+
+        <!--</android.support.design.widget.BottomNavigationView>-->
+    <!--</RelativeLayout>-->
+
+
+</RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>
 

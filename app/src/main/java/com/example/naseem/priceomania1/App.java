@@ -5,6 +5,7 @@ package com.example.naseem.priceomania1;
  */
 
 public class App {
+    private String mID;
     private String mImageUrl;
     private String mName;
     private String mCurrency;
@@ -13,12 +14,21 @@ public class App {
 
     String image_path = "http://ae.priceomania.com/backend/ProductImage/";
 
-    public App(String mImageUrl, String mName, String mCurrency, String mPrice, String mCount) {
+    public App(String mID,String mImageUrl, String mName, String mCurrency, String mPrice, String mCount) {
+        this.mID=mID;
         this.mImageUrl =image_path+mImageUrl;
         this.mName = mName;
         this.mCurrency = mCurrency;
         this.mPrice = mPrice;
         this.mCount = mCount;
+    }
+
+    public String getmID() {
+        return mID;
+    }
+
+    public void setmID(String mID) {
+        this.mID = mID;
     }
 
     public String getmImageUrl() {
